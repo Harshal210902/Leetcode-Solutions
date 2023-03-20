@@ -11,24 +11,71 @@ using namespace std;
 #define sortit(array) sort(array.begin(), array.end())
 const int M = 1e9 + 7;
 
-bool canPlaceFlowers(vector<int> &flowerbed, int n)
+class Trie
 {
-    if (n == 0)
-        return true;
-    for (int i = 0; i < flowerbed.size(); i++)
+public:
+    struct trie
     {
-        if(flowerbed[i]==0 && (i==0|| flowerbed[i-1]==0) && (i==flowerbed.size()-1 || flowerbed[i+1]==0))
-        {
-            n--;
-            if(n==0) return true;
-            flowerbed[i]=1;
-        }
-    }
-    return false;
-}
+        trie *arr[26];
+        bool isend;
+    };
 
-int main()
-{
-    vector<int> flowerbed = {1, 0, 0, 0, 1};
-    cout << canPlaceFlowers(flowerbed, 2);
-}
+    trie *node;
+
+    Trie()
+    {
+        node = new trie();
+    }
+
+    void insert(string word)
+    {
+        ios_base::sync_with_stdio(false);
+        trie *temp = node;
+
+        for (int i = 0; i < word.size(); i++)
+        {
+            if (!temp->arr[word[i] - 'a'])
+            {
+                temp->arr[word[i] - 'a'] = new trie();
+            }
+            temp = temp->arr[word[i] - 'a'];
+        }
+
+        temp->isend = true;
+    }
+
+    bool search(string word)
+    {
+
+        trie *temp = node;
+
+        for (int i = 0; i < word.size(); i++)
+        {
+            if (!temp->arr[word[i] - 'a'])
+            {
+                return 0;
+            }
+            temp = temp->arr[word[i] - 'a'];
+        }
+
+        if (temp->isend)
+            return 1;
+
+        return 0;
+    }
+
+    bool startsWith(string word)
+    {
+        trie *temp = node;
+
+        for (int i = 0; i < word.size(); i++)
+        {
+            if (!temp->arr[word[i] - 'a'])
+            {
+                return 0;
+            }
+            temp = temp->arr[word[i] - 'a'];
+        }
+        return 1;
+    }
+};
