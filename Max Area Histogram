@@ -1,3 +1,16 @@
+#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <math.h>
+using namespace std;
+#define ll long long
+#define IOS ios_base::sync_with_stdio(false);
+#define print(array)      \
+    for (auto it : array) \
+    cout << it << " "
+#define sortit(array) sort(array.begin(), array.end())
+const int M = 1e9 + 7;
+
 int largestRectangleArea(vector<int>& heights) {
         int n =heights.size();
     vector<int> leftsmall(n,0);
@@ -41,3 +54,9 @@ int largestRectangleArea(vector<int>& heights) {
 
     return maxi;
     }
+    
+int main()
+{
+    vector<int> heights = {2,1,5,6,2,3};
+    cout<<largestRectangleArea(heights);
+}
