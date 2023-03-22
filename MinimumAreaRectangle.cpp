@@ -1,3 +1,5 @@
+//TC = O(n^2)
+//SC = O(n^2)
 int minAreaRect(vector<vector<int>>& points) {
         ios_base::sync_with_stdio(false);
         cin.tie(0);
